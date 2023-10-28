@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>pdf converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="flask"><center>PDF Converter</center> </div>
+<br>
+    <form action="/convert" method="POST" enctype="multipart/form-data">
+        <label for="file">Select a file:</label>
+        <input type="file" id="file" name="file" accept=" .pdf,.jpg, .jpeg, .png, .gif,.bmp,.tiff,.pbm,.pgm,.ppm,.xbm,.webp, .doc, .docx, .pptx ,.ppt ,.xlsx,.pps,.ppsx,.odp,.xlsm,.xlsb,.xltx,  .xml   ">
+        <br>
+        <br>
+        <label for="conversion_type">Select Conversion Type:</label>
+        <select name="conversion_type" id="conversion_type">
+        <option value="pdf_to_image">PDF to Image</option>
+        <option value="pdf_to_text">PDF to Text</option>
+        <option value="pdf_to_xlsx">PDF to Excel</option>
+        <option value="pdf_to_csv">PDF to CSV</option>
+        <option value="image_to_pdf">Image to PDF</option>
+        <option value="doc_to_pdf">Doc to PDF</option>
+        <option value="excel_to_pdf">Excel to PDF</option>
+        <option value="csv_to_pdf">CSV to PDF</option>
+    </select>
+<br><br>
+        <input type="submit" value="Convert">
+    </form>
+    {% if pdf_url %}
+        <p>Converted PDF: <a href="{{ pdf_url }}" download>Download PDF</a></p>
+    {% endif %}
+    {% if image_urls %}
+        <p>Converted Images:</p>
+    {% for image_url in image_urls %}
+        <a href="{{ image_url }}" download>Download Image {{ loop.index }}</a>
+    {% endfor %}
+    {% endif %}
+    {% if xlsx_url %}
+        <p>Converted Excel:</p>
+        <a href="{{ xlsx_url }}" download>Download Excel</a>
+    {% endif %}
+    {% if csv_url %}
+       <p>Converted CSV:</p>
+       <a href="{{ csv_url }}" download>Download CSV</a>
+    {% endif %}
+    {% if text_url %}
+       <p>Converted Text:</p>
+       <a href="{{ text_url }}" download>Download Text</a>
+    {% endif %}
+</body>
+</html>
