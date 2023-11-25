@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Compression</title>
+</head>
+<body>
+    <h1>PDF Compression</h1>
+
+    <form action="/compress" method="post" enctype="multipart/form-data">
+        <label for="file">Select PDF file:</label>
+        <input type="file" name="file" id="file" accept=".pdf" required>
+        <label for="compression-level">Select Compression Level:</label>
+        <select name="compression_level" id="compression-level" required>
+            <option value="1">Extreme Compression</option>
+            <option value="2">Recommended Compression</option>
+            <option value="3">Less Compression</option>
+        </select>
+        <input type="submit" value="Compress">
+    </form>
+{% if compressed_file %}
+    <h2>Download Compressed PDF:</h2>
+    <p><a href="{{ url_for('download_compressed_pdf', filename=os.path.basename(compressed_file)) }}" download>Download Compressed PDF</a></p>
+{% endif %}
+</body>
+</html>

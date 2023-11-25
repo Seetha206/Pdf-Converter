@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Repair PDF</title>
+</head>
+<body>
+    <h1>Repair PDF</h1>
+    <form action="/repair" method="post" enctype="multipart/form-data">
+        <input type="file" name="pdf_file" accept=".pdf" required>
+        <input type="submit" value="Repair PDF">
+    </form>
+    {% if repaired_pdf_url %}
+    <p>Your PDF is repaired. Download it <a href="{{ repaired_pdf_url }}" download>here</a>.</p>
+    {% endif %}
+</body>
+</html>

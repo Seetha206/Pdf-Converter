@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merge PDFs</title>
+    <script>
+        function showSecondFileInput() {
+            document.getElementById('file-input-2').style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <h1>Merge PDFs</h1>
+    <form action="/merge" method="POST" enctype="multipart/form-data">
+        <label for="pdf_files_1">Select First PDF File:</label>
+        <input type="file" name="pdf_files" id="pdf_files_1" accept=".pdf" onchange="showSecondFileInput()">
+        <br>
+        <div id="file-input-2" style="display: none;">
+            <label for="pdf_files_2">Select Second PDF File:</label>
+            <input type="file" name="pdf_files" id="pdf_files_2" accept=".pdf">
+        </div>
+        <br>
+        <input type="submit" value="Merge PDFs">
+    </form>
+    {% if merged_pdf_url %}
+    <p>Click <a href="{{ merged_pdf_url }}" target="_blank">here</a> to download the merged PDF.</p>
+    {% endif %}
+</body>
+</html>

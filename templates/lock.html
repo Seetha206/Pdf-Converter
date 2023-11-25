@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lock PDF</title>
+    <script>
+        function showPasswordFields() {
+            var fileInput = document.getElementById('pdf_file');
+            var passwordFields = document.getElementById('passwordFields');
+            if (fileInput.files.length > 0) {
+                passwordFields.style.display = 'block';
+            } else {
+                passwordFields.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Lock PDF</h1>
+    <form action="/lock" method="post" enctype="multipart/form-data">
+        <input type="file" name="pdf_file" id="pdf_file" accept=".pdf" required onchange="showPasswordFields()">
+        <div id="passwordFields" style="display: none;">
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+            <input type="submit" value="Lock PDF">
+        </div>
+    </form>
+    {% if locked_pdf_url %}
+    <p>Your PDF is locked. Download it <a href="{{ locked_pdf_url }}" download>here</a>.</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rotate PDF</title>
+</head>
+<body>
+    <h1>Rotate PDF</h1>
+    <form action="/rotate" method="post" enctype="multipart/form-data">
+        <input type="file" name="pdf_file" accept=".pdf" required>
+        <button type="submit" name="rotate_direction" value="left">Rotate Left</button>
+        <button type="submit" name="rotate_direction" value="right">Rotate Right</button>
+    </form>
+    {% if rotated_pdf_url %}
+    <p>Your PDF is rotated. Download it <a href="{{ rotated_pdf_url }}" download>here</a>.</p>
+    {% endif %}
+</body>
+</html>

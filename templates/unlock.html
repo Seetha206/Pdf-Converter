@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unlock PDF</title>
+    <script>
+        function showPasswordFields() {
+            var fileInput = document.getElementById('pdf_file');
+            var passwordFields = document.getElementById('passwordFields');
+            if (fileInput.files.length > 0) {
+                passwordFields.style.display = 'block';
+            } else {
+                passwordFields.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Unlock PDF</h1>
+    <form action="/unlock" method="post" enctype="multipart/form-data">
+        <input type="file" name="pdf_file" id="pdf_file" accept=".pdf" required onchange="showPasswordFields()">
+        <div id="passwordFields" style="display: none;">
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Unlock PDF">
+        </div>
+    </form>
+    {% if unlocked_pdf_url %}
+    <p>Your PDF is unlocked. Download it <a href="{{ unlocked_pdf_url }}" download>here</a>.</p>
+    {% endif %}
+</body>
+</html>

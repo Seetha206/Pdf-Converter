@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Split PDF</title>
+</head>
+<body>
+    <h1>Split PDF</h1>
+    {% if split_pdf_paths %}
+        <ul>
+            {% for split_pdf_path in split_pdf_paths %}
+                <li>
+                    <a href="{{ url_for('download_split_pdf', filename=split_pdf_path) }}" download>{{ 'Split Page ' ~ loop.index }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('download_zip', zip_filename=zip_filename) }}" download>Download All as Zip</a>
+    {% else %}
+        <form action="/download_all_zip" method="post" enctype="multipart/form-data">
+            <input type="file" name="pdf_file" accept=".pdf" required>
+            <input type="submit" value="Split PDF">
+        </form>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Pages</title>
+</head>
+<body>
+    <h1>Delete Pages</h1>
+    <form action="/delete" method="post" enctype="multipart/form-data">
+        <input type="file" name="pdf_file" accept=".pdf" required>
+        <input type="text" name="pages_to_delete" placeholder="Pages to delete" required>
+        <input type="submit" value="Delete Pages">
+    </form>
+    {% if deleted_pdf_url %}
+    <p>Page deleted. Download PDF <a href="{{ deleted_pdf_url }}" download>here</a>.</p>
+    {% endif %}
+</body>
+</html>
